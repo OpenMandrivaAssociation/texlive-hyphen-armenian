@@ -44,12 +44,12 @@ Hyphenation patterns for Armenian for Unicode engines.
 %install
 mkdir -p %{buildroot}%{_texmf_language_dat_d}
 cat > %{buildroot}%{_texmf_language_dat_d}/hyphen-armenian <<EOF
-%% from hyphen-armenian:
+\%\% from hyphen-armenian:
 armenian loadhyph-hy.tex
 EOF
 mkdir -p %{buildroot}%{_texmf_language_def_d}
 cat > %{buildroot}%{_texmf_language_def_d}/hyphen-armenian <<EOF
-%% from hyphen-armenian:
+\%\% from hyphen-armenian:
 \addlanguage{armenian}{loadhyph-hy.tex}{}{1}{2}
 EOF
 mkdir -p %{buildroot}%{_texmf_language_lua_d}
