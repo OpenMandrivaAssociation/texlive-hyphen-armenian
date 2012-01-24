@@ -5,8 +5,8 @@
 # catalog-license undef
 # catalog-version undef
 Name:		texlive-hyphen-armenian
-Version:	20111103
-Release:	2
+Version:	20120124
+Release:	1
 Summary:	Armenian hyphenation patterns
 Group:		Publishing
 URL:		http://tug.org/texlive
@@ -44,14 +44,16 @@ Hyphenation patterns for Armenian for Unicode engines.
 %install
 mkdir -p %{buildroot}%{_texmf_language_dat_d}
 cat > %{buildroot}%{_texmf_language_dat_d}/hyphen-armenian <<EOF
-\%\% from hyphen-armenian:
+\%% from hyphen-armenian:
 armenian loadhyph-hy.tex
 EOF
+perl -pi -e 's|\\%%|%%|;' %{buildroot}%{_texmf_language_dat_d}/hyphen-armenian
 mkdir -p %{buildroot}%{_texmf_language_def_d}
 cat > %{buildroot}%{_texmf_language_def_d}/hyphen-armenian <<EOF
-\%\% from hyphen-armenian:
+\%% from hyphen-armenian:
 \addlanguage{armenian}{loadhyph-hy.tex}{}{1}{2}
 EOF
+perl -pi -e 's|\\%%|%%|;' %{buildroot}%{_texmf_language_def_d}/hyphen-armenian
 mkdir -p %{buildroot}%{_texmf_language_lua_d}
 cat > %{buildroot}%{_texmf_language_lua_d}/hyphen-armenian <<EOF
 -- from hyphen-armenian:
