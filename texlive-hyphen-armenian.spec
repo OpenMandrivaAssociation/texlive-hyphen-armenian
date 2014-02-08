@@ -6,7 +6,7 @@
 # catalog-version undef
 Name:		texlive-hyphen-armenian
 Version:	20120124
-Release:	1
+Release:	2
 Summary:	Armenian hyphenation patterns
 Group:		Publishing
 URL:		http://tug.org/texlive
