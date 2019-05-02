@@ -5,7 +5,7 @@
 # catalog-license undef
 # catalog-version undef
 Name:		texlive-hyphen-armenian
-Version:	20181105
+Version:	20190406
 Release:	1
 Summary:	Armenian hyphenation patterns
 Group:		Publishing
