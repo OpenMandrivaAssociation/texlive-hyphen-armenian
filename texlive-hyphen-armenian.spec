@@ -1,6 +1,6 @@
 Name:		texlive-hyphen-armenian
-Version:	58652
-Release:	2
+Version:	73410
+Release:	1
 Summary:	Armenian hyphenation patterns
 Group:		Publishing
 URL:		https://tug.org/texlive
