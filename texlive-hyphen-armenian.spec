@@ -1,67 +1,22 @@
-Name:		texlive-hyphen-armenian
-Version:	73410
+%global tl_name hyphen-armenian
+%global tl_revision 78069
+
+Name:		texlive-%{tl_name}
+Version:	%{tl_revision}
 Release:	1
-Summary:	Armenian hyphenation patterns
+Summary:	Armenian hyphenation patterns.
 Group:		Publishing
-URL:		https://tug.org/texlive
-License:	http://www.tug.org/texlive/LICENSE.TL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/hyphen-armenian.r%{version}.tar.xz
+URL:		https://www.ctan.org/pkg/hyphen-armenian
+License:	LPPL
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/hyphen-armenian.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/hyphen-armenian.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-hyphen-base
-Requires:	texlive-hyph-utf8
+BuildSystem:	texlive
+Requires:	texlive(hyph-utf8)
+Requires:	texlive(hyphen-base)
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-Hyphenation patterns for Armenian for Unicode engines.
+Hyphenation patterns for Armenian for Unicode engines. Auto-generated
+from a script included in hyph-utf8.
 
-%post
-%{_sbindir}/texlive.post
-
-%postun
-if [ $1 -eq 0 ]; then
-	%{_sbindir}/texlive.post
-fi
-
-#-----------------------------------------------------------------------
-%files
-%_texmf_language_dat_d/hyphen-armenian
-%_texmf_language_def_d/hyphen-armenian
-%_texmf_language_lua_d/hyphen-armenian
-%{_texmfdistdir}/tex/generic/hyph-utf8/loadhyph/*
-%{_texmfdistdir}/tex/generic/hyph-utf8/patterns/*/*
-
-#-----------------------------------------------------------------------
-%prep
-%autosetup -p1 -c
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -fpar tex %{buildroot}%{_texmfdistdir}
-
-mkdir -p %{buildroot}%{_texmf_language_dat_d}
-cat > %{buildroot}%{_texmf_language_dat_d}/hyphen-armenian <<EOF
-\%% from hyphen-armenian:
-armenian loadhyph-hy.tex
-EOF
-perl -pi -e 's|\\%%|%%|;' %{buildroot}%{_texmf_language_dat_d}/hyphen-armenian
-mkdir -p %{buildroot}%{_texmf_language_def_d}
-cat > %{buildroot}%{_texmf_language_def_d}/hyphen-armenian <<EOF
-\%% from hyphen-armenian:
-\addlanguage{armenian}{loadhyph-hy.tex}{}{1}{2}
-EOF
-perl -pi -e 's|\\%%|%%|;' %{buildroot}%{_texmf_language_def_d}/hyphen-armenian
-mkdir -p %{buildroot}%{_texmf_language_lua_d}
-cat > %{buildroot}%{_texmf_language_lua_d}/hyphen-armenian <<EOF
--- from hyphen-armenian:
-	['armenian'] = {
-		loader = 'loadhyph-hy.tex',
-		lefthyphenmin = 1,
-		righthyphenmin = 2,
-		synonyms = {  },
-		patterns = 'hyph-hy.pat.txt',
-		hyphenation = '',
-	},
-EOF
