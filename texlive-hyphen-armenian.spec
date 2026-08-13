@@ -14,9 +14,33 @@ BuildArch:	noarch
 BuildSystem:	texlive
 Requires:	texlive(hyph-utf8)
 Requires:	texlive(hyphen-base)
-Provides:	texlive(%{tl_name}) = %{tl_revision}
+Requires:	texlive-tlpkg
+Provides:	texlive(%{tl_name}) = %{version}
 
 %description
 Hyphenation patterns for Armenian for Unicode engines. Auto-generated
 from a script included in hyph-utf8.
 
+
+%install -a
+mkdir -p %{buildroot}%{_texmf_language_dat_d}
+cat > %{buildroot}%{_texmf_language_dat_d}/%{tl_name} <<'TL_HYPHEN_EOF'
+% from hyphen-armenian:
+armenian loadhyph-hy.tex
+TL_HYPHEN_EOF
+mkdir -p %{buildroot}%{_texmf_language_def_d}
+cat > %{buildroot}%{_texmf_language_def_d}/%{tl_name} <<'TL_HYPHEN_EOF'
+% from hyphen-armenian:
+\addlanguage{armenian}{loadhyph-hy.tex}{}{1}{2}
+TL_HYPHEN_EOF
+mkdir -p %{buildroot}%{_texmf_language_lua_d}
+cat > %{buildroot}%{_texmf_language_lua_d}/%{tl_name} <<'TL_HYPHEN_EOF'
+-- from hyphen-armenian:
+['armenian'] = {
+	loader = 'loadhyph-hy.tex',
+	lefthyphenmin = 1,
+	righthyphenmin = 2,
+	synonyms = {  },
+	patterns = 'hyph-hy.pat.txt',
+},
+TL_HYPHEN_EOF
